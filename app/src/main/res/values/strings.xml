@@ -5,4 +5,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+
+
+    <string name="username">Firstname Lastname</string>
+    <string name="testString">This is where text goes, Im gonna keep typing till text goes onto the next line hopefully!
+        Not sure how new lines are gonna count!"</string>
+    <string name="qtype1">Yes/No</string>
+    <string name="qtype2">Choice</string>
+    <string name="qtype3">Rate</string>
+    <string name="addq_enterq">Enter question here</string>
+
+
 </resources>

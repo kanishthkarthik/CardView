@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,56 +19,26 @@ import it.gmariotti.cardslib.library.view.CardView;
 
 
 public class MyActivity extends Activity {
+    ListView list;
+    String[] username = new String[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        for(int i = 0; i<7; i++)
+            username[i] = "User "+(i+1);
 
-
-        ArrayList<Card> cards = new ArrayList<Card>();
-
-        //Create a Card
-        Card[] card= new Card[10];
-        CardHeader header = new CardHeader(this);
-
-        for(int i = 0;i<10;i++)
-        {
-            card[i]= new Card(this);
-            //Add Header to card
-            card[i].addCardHeader(header);
-            cards.add(card[i]);
-        }
-
-        CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(this,cards);
-
-        CardListView listView = (CardListView) this.findViewById(R.id.myList);
-        if (listView!=null)
-        listView.setAdapter(mCardArrayAdapter);
-
-
-
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        CardList adapter = new CardList(MyActivity.this, username);
+        list=(ListView)findViewById(R.id.myList);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(MyActivity.this, "You Clicked at " + username[+position], Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
